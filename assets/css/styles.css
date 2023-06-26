@@ -1,3 +1,82 @@
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: var(--accent-color);
+}
+
+p {
+  color: var(--text-color);
+}
+
+footer a {
+  color: var(--accent-color);
+}
+
+.card-text,
+.form-label {
+  color: var(--paragraph-color);
+}
+
 .progress {
-    height: 30px;
+  height: 30px;
+}
+
+/* Utility */
+.z-index-10 {
+  z-index: 10;
+}
+
+
+/* Animation */
+
+@keyframes animate {
+  0%{
+      transform: rotate(0deg);
   }
+  100%{
+      transform: rotate(360deg);
+  }
+
+}
+
+.portfolio-navbar {
+  overflow: hidden;
+  position: relative;
+}
+
+.portfolio-navbar::before{
+  content:'';
+  position: absolute;
+  top:100%;
+  left:0%;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(0deg, transparent, #45f3ff);
+  transform-origin: center top;
+  animation: animate 6s linear infinite;
+}
+
+/*
+.portfolio-navbar::after{
+  content:'';
+  position: absolute;
+  top:100%;
+  left:50%;
+  width: 380px;
+  height: 420px;
+  background: linear-gradient(0deg, transparent, #45f3ff);
+  transform-origin: center bottom;
+  animation: animate 6s linear infinite;
+}*/
+
+.portfolio-navbar::after {
+  animation-delay: -3s;
+}
+
