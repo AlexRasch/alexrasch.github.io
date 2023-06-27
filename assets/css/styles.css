@@ -49,34 +49,28 @@ footer a {
 .portfolio-navbar {
   overflow: hidden;
   position: relative;
+  border-radius: 8px;
+  padding: 5px 5px 5px 5px;
+  height: 65px;
 }
 
 .portfolio-navbar::before{
   content:'';
   position: absolute;
-  top:100%;
-  left:0%;
-  width: 100%;
-  height: 50px;
-  background: linear-gradient(0deg, transparent, #45f3ff);
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  background: linear-gradient(0deg, transparent, var(--accent-color));
   transform-origin: center top;
   animation: animate 6s linear infinite;
 }
-
-/*
 .portfolio-navbar::after{
   content:'';
   position: absolute;
-  top:100%;
-  left:50%;
-  width: 380px;
-  height: 420px;
-  background: linear-gradient(0deg, transparent, #45f3ff);
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  background: linear-gradient(0deg, transparent, var(--accent-color));
   transform-origin: center bottom;
   animation: animate 6s linear infinite;
-}*/
-
-.portfolio-navbar::after {
   animation-delay: -3s;
 }
 
