@@ -15,6 +15,7 @@ p {
   color: var(--text-color);
 }
 
+p a,
 footer a {
   color: var(--accent-color);
 }
@@ -29,6 +30,8 @@ footer a {
 }
 
 /* Utility */
+
+
 .z-index-10 {
   z-index: 10;
 }
