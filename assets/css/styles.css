@@ -34,6 +34,14 @@ footer a {
   height: 30px;
 }
 
+#btnBackToTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+}
+
 /* Shadow amazing tool https://alvarotrigo.com/shadow-gradients/*/
 .card:hover:before {
   content: "";
