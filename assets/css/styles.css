@@ -25,20 +25,57 @@ footer a {
   color: var(--paragraph-color);
 }
 
+.card {
+  width: 100%;
+  height: 100%;
+}
+
 .progress {
   height: 30px;
 }
 
+/* Shadow amazing tool https://alvarotrigo.com/shadow-gradients/*/
+.card:hover:before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(3deg, var(--accent-color) 0%, var(--progress-color) 100% );
+  transform: translate3d(0px, 0px, 0) scale(1);
+  filter: blur(50px);
+  opacity: var(0.5);
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
+
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.card:hover::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  border-radius: inherit;
+}
+
+
 /* Utility */
-
-
 .z-index-10 {
   z-index: 10;
 }
 
 
 /* Animation */
-
 @keyframes animate {
   0%{
       transform: rotate(0deg);
