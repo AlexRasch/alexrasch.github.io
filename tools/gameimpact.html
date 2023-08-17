@@ -30,7 +30,7 @@
                 <div class="d-grid gap-2">
                     <button onclick="calculateProbability()" class="btn btn-info">Calculate Probability</button>
                 </div>
-                <p id="result"></p>
+                <p id="result">Probability:</p>
             </div>
             <div class="col">
                 <div class="form-floating mb-3">
@@ -46,7 +46,7 @@
                 <div class="d-grid gap-2">
                     <button onClick="calculateCooldown()" class="btn btn-info">Calculate cooldown change</button>
                 </div>
-                <p id="resultCoolDown"></p>
+                <p id="resultCoolDown">New cooldown:</p>
             </div>
         </div>
 
@@ -57,18 +57,22 @@
                 <th>Probability (%)</th>
             </tr>
         </table>
-        <p>Use this tool to explore how changes in the probability of an event occurring (0 - 100%) can impact your game
-            outcomes. Enter the probability of the event and the number of attempts to calculate the likelihood of the
-            event happening.</p>
-        <p>
-            <strong>Note:</strong> Use this tool to analyze how adjustments to event probabilities (such as critical
-            strike chances) impact your in-game outcomes. For instance, if you want to evaluate the effects of an
-            increased chance to land critical strikes, follow these steps:
-        </p>
+        <p>Use this tool to explore how changes in the probability of an event occurring (0 - 100%) can impact your game outcomes.
+            Enter the probability of the event and the number of attempts to calculate the likelihood of the event happening.</p>
+        <p><strong>Note:</strong> This tool can help you analyze the effects of adjustments to event probabilities on your in-game
+            outcomes. For example, if you want to evaluate how an increased chance of landing critical strikes affects your game:</p>
         <ul>
-            <li><strong>Event Probability:</strong> Enter the critical strike chance.</li>
-            <li><strong>Event:</strong> Specify the action that triggers the event, like an auto attack.</li>
+            <li><strong>Event Probability:</strong> Enter the critical strike chance. You can use percentages from 0 to 100,
+                including negative values like -10 to represent a decrease in chance.</li>
+            <li><strong>Number of Events:</strong> Specify the number of events you're interested in. This could be the number of
+                auto attacks or any other in-game occurrences.</li>
+            <li><strong>Calculate Probability:</strong> Click this button to calculate the probability of the event happening.</li>
+            <li><strong>Calculate Cooldown Change:</strong> To explore the impact of increased or decreased attack speed, enter the
+                current cooldown time in seconds and the cooldown change as a percentage (positive for faster cooldown and negative
+                for slower cooldown). Click this button to see the new cooldown time.</li>
         </ul>
+        <p><strong>Note:</strong> If you're calculating cooldown changes, the table will be cleared to focus on the new results.
+        </p>
     </div>
     <script>
         function calculateProbability() {
@@ -126,7 +130,7 @@
         }
 
         function displayNewCoolDown(newAttackSpeed) {
-            document.getElementById("resultCoolDown").innerHTML = "New Attack Speed: " + newAttackSpeed.toFixed(2) + " sec";
+            document.getElementById("resultCoolDown").innerHTML = "New cooldown: " + newAttackSpeed.toFixed(2) + " sec";
         }
         /*  Table functions */
 
