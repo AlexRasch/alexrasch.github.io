@@ -16,15 +16,29 @@
 <body>
     <div class="container">
         <h1>Game Impact Calculator</h1>
-        <p>Use this tool to explore how changes in the probability of an event occurring (0 - 100%) can impact your game
-            outcomes. Enter the probability of the event and the number of attempts to calculate the likelihood of the
-            event happening.</p>
-        <label for="odds">Event Probability (%):</label>
-        <input type="text" id="odds" step="0.01" min="0" max="100"><br><br>
-        <label for="events">Number of Events*:</label>
-        <input type="number" id="events" min="1"><br><br>
-        <button onclick="calculateProbability()" class="btn btn-info">Calculate Probability</button>
-        <p id="result"></p>
+        <div class="row">
+            <div class="col">
+                <label for="odds">Event Probability (%):</label>
+                <input type="number" id="odds" step="0.01" min="0" max="100"><br><br>
+                <label for="events">Number of Events*:</label>
+                <input type="number" id="events" min="1" max="100"><br><br>
+                <div class="d-grid gap-2">
+                    <button onclick="calculateProbability()" class="btn btn-info">Calculate Probability</button>
+                </div>
+                <p id="result"></p>
+            </div>
+            <div class="col">
+                <label for="speed">Current cooldown (sec):</label>
+                <input type="number" id="speed" step="0.01" min="0"><br><br>
+                <label for="speedChange">Cooldown Change (%):</label>
+                <input type="number" id="speedChange" step="0.01"><br><br>
+                <div class="d-grid gap-2">
+                    <button onClick="calculateCooldown()" class="btn btn-info">Calculate cooldown change</button>
+                </div>
+                <p id="resultCoolDown"></p>
+            </div>
+        </div>
+
         <table id="probabilityTable" class="table table-striped" border="1">
             <tr>
                 <th>Number of Events</th>
@@ -32,6 +46,9 @@
                 <th>Probability (%)</th>
             </tr>
         </table>
+        <p>Use this tool to explore how changes in the probability of an event occurring (0 - 100%) can impact your game
+            outcomes. Enter the probability of the event and the number of attempts to calculate the likelihood of the
+            event happening.</p>
         <p>
             <strong>Note:</strong> Use this tool to analyze how adjustments to event probabilities (such as critical
             strike chances) impact your in-game outcomes. For instance, if you want to evaluate the effects of an
@@ -46,20 +63,33 @@
         function calculateProbability() {
             var oddsPercentage = parseFloat(document.getElementById("odds").value);
             var numberOfEvents = parseInt(document.getElementById("events").value);
-    
+
             if (!isValidInput(oddsPercentage, numberOfEvents)) {
                 return;
             }
-    
+
             clearTable();
-    
+
             var odds = oddsPercentage / 100;
             var probability = calculateEventProbability(odds, numberOfEvents);
             displayResult(probability);
-    
+
             generateTableRows(oddsPercentage, odds, numberOfEvents);
         }
-    
+
+        function calculateCooldown() {
+            var attackSpeed = parseFloat(document.getElementById("speed").value);
+            var speedChange = parseFloat(document.getElementById("speedChange").value);
+
+            // ToDo input validation
+
+
+            var newAttackSpeed = calculateNewAttackSpeed(attackSpeed, speedChange);
+            displayNewCoolDown(newAttackSpeed);
+
+            clearTable();
+        }
+
         function isValidInput(oddsPercentage, numberOfEvents) {
             if (isNaN(oddsPercentage) || isNaN(numberOfEvents) || oddsPercentage < 0 || oddsPercentage > 100 || numberOfEvents < 1) {
                 document.getElementById("result").innerHTML = "Please enter valid values.";
@@ -67,33 +97,46 @@
             }
             return true;
         }
-    
+
+        /* Math functions */
+
+        function calculateNewAttackSpeed(currentSpeed, speedChange) {
+            return currentSpeed * (1 + speedChange / 100);
+        }
+
         function calculateEventProbability(odds, numberOfEvents) {
             return 1 - Math.pow(1 - odds, numberOfEvents);
         }
-    
+
+        /* Display functions */
+
         function displayResult(probability) {
             document.getElementById("result").innerHTML = "Probability: " + (probability * 100).toFixed(2) + "%";
         }
-    
+
+        function displayNewCoolDown(newAttackSpeed) {
+            document.getElementById("resultCoolDown").innerHTML = "New Attack Speed: " + newAttackSpeed.toFixed(2) + " sec";
+        }
+        /*  Table functions */
+
         function generateTableRows(oddsPercentage, odds, numberOfEvents) {
             var table = document.getElementById("probabilityTable");
             var eventCounts = [1, 2, 3, 4, 5, 10, 15];
-    
+
             for (var i = 0; i < eventCounts.length; i++) {
                 var count = eventCounts[i];
                 var newRow = table.insertRow(-1);
                 var newCell1 = newRow.insertCell(0);
                 var newCell2 = newRow.insertCell(1);
                 var newCell3 = newRow.insertCell(2);
-    
+
                 var eventProbability = calculateEventProbability(odds, count);
                 newCell1.innerHTML = count;
                 newCell2.innerHTML = oddsPercentage + "%";
                 newCell3.innerHTML = (eventProbability * 100).toFixed(2) + "%";
             }
         }
-    
+
         function clearTable() {
             var table = document.getElementById("probabilityTable");
             var rowCount = table.rows.length;
@@ -102,7 +145,7 @@
             }
         }
     </script>
-    
+
 </body>
 
 </html>
